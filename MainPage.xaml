@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CleanDisher.MainPage"
+             
+             Loaded="ContentPage_Loaded"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#fafafa">
+
+    <ContentPage.Resources>
+        <Color x:Key="Sections">#1f1f1f</Color>
+        <Color x:Key="LightFont">#000000</Color>
+        <Color x:Key="DarkFont">#989898</Color>
+        <Color x:Key="ContentHeader">#98BFF6</Color>
+        <Color x:Key="ContentHeaderText">White</Color>
+        <Color x:Key="ContentBody">White</Color>
+
+        <Color x:Key="TableBorder">LightGray</Color>
+        <Color x:Key="TableHeader">White</Color>
+        <Color x:Key="TableBody">#c8c8c8</Color>
+        <Color x:Key="TableText">Black</Color>
+    </ContentPage.Resources>
+
+    <ScrollView>
+
+        <Grid Padding="10">
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>-->
+
+            <!--<Border Padding="8" StrokeThickness="0" BackgroundColor="{StaticResource Sections}">
+                <Label Text="Monitor" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource DarkFont}"/>
+            </Border>-->
+
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 VerticalOptions="Start">
+                <!--<BoxView Margin="0,30,0,0"
+                         VerticalOptions="Center"
+                         Color="#adadad"/>-->
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="15">
+
+                    <Border x:Name="BorderReady"
+                            WidthRequest="100" HeightRequest="100" BackgroundColor="AliceBlue">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10,10,10,10" />
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                Offset="10,10"
+                                Radius="10"
+                                Opacity="0.3" />
+                        </Border.Shadow>
+
+                        <Button x:Name="BtnReady" BackgroundColor="Gray" FontAttributes="Bold" TextColor="White" Text="Ready&#10;OFF" LineBreakMode="WordWrap" Clicked="BtnReady_Clicked"/>
+                    </Border>
+
+                    <Border WidthRequest="100" HeightRequest="100" BackgroundColor="AliceBlue">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10,10,10,10" />
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                Offset="10,10"
+                                Radius="10"
+                                Opacity="0.3" />
+                        </Border.Shadow>
+                        <Button x:Name="BtnAction" BackgroundColor="Gray" FontAttributes="Bold" TextColor="White"  Text="Action&#10;OFF" LineBreakMode="WordWrap" Clicked="BtnAction_Clicked"/>
+                    </Border>
+
+                    <Border WidthRequest="100" HeightRequest="100" BackgroundColor="AliceBlue">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10,10,10,10" />
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                Offset="10,10"
+                                Radius="10"
+                                Opacity="0.3" />
+                        </Border.Shadow>
+
+                        <Button x:Name="BtnCleaning" BackgroundColor="Gray" FontAttributes="Bold" TextColor="White" Text="Cleaning&#10;OFF" LineBreakMode="WordWrap" Clicked="BtnCleaning_Clicked"/>
+                    </Border>
+
+                </HorizontalStackLayout>
+
+                <BoxView Margin="0,10,0,0"
+                         VerticalOptions="Center"
+                         Color="#adadad"/>
+               
+                
+                <Grid RowDefinitions="30,*,30,*,30,*,30,*" Padding="15">
+
+                    <Label Grid.Row="0"
+                           VerticalTextAlignment="End"
+                           Text="환경"
+                           FontSize="18"
+                           TextColor="{StaticResource LightFont}" />
+
+                    <Border Grid.Row="1"
+                            StrokeThickness="1"
+                            Stroke="Transparent">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="4,4,4,4" />
+                        </Border.StrokeShape>
+                        <Grid HeightRequest="60"
+                              RowDefinitions="*,*"
+                              ColumnDefinitions="*,*,*">
+                            <Border Margin="-2,-2,-3,-2"
+                                    StrokeThickness="1"
+                                    Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}"
+                                       TextColor="{StaticResource ContentHeaderText}"
+                                       FontSize="15"
+                                       Text="실내 온도"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center" />
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2"
+                                    StrokeThickness="1"
+                                    Grid.Column="1"
+                                    Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}"
+                                       TextColor="{StaticResource ContentHeaderText}"
+                                       FontSize="15"
+                                       Text="습도"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center" />
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2"
+                                    StrokeThickness="1"
+                                    Grid.Column="2"
+                                    Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}"
+                                       TextColor="{StaticResource ContentHeaderText}"
+                                       FontSize="15"
+                                       Text="미세먼지"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center" />
+                            </Border>
+
+                            <Border Margin="-2,-2,-3,-2"
+                                    StrokeThickness="1"
+                                    Grid.Row="1"
+                                    Stroke="Transparent">
+                                <Label x:Name="LbTemperatureInside"
+                                       FontAttributes="Bold"
+                                       BackgroundColor="{StaticResource ContentBody}"
+                                       TextColor="{StaticResource TableText}"
+                                       FontSize="15"
+                                       Text="0.0"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center" />
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2"
+                                    StrokeThickness="1"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Stroke="Transparent">
+                                <Label x:Name="LbHumidity"
+                                       FontAttributes="Bold"
+                                       BackgroundColor="{StaticResource ContentBody}"
+                                       TextColor="{StaticResource TableText}"
+                                       FontSize="15"
+                                       Text="0.0"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center" />
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2"
+                                    StrokeThickness="1"
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    Stroke="Transparent">
+                                <Label x:Name="LbDust"
+                                       FontAttributes="Bold"
+                                       BackgroundColor="{StaticResource ContentBody}"
+                                       TextColor="{StaticResource TableText}"
+                                       FontSize="15"
+                                       Text="보통"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+
+                    <Label Grid.Row="2" VerticalTextAlignment="End" Text="물 사용량(L)" FontSize="18" TextColor="{StaticResource LightFont}"/>
+
+                    <Border Grid.Row="3" StrokeThickness="1" Stroke="Transparent">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="4,4,4,4" />
+                        </Border.StrokeShape>
+                        <Grid HeightRequest="60" RowDefinitions="*,*" ColumnDefinitions="*,*,*">
+                            <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="오늘" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Column="1" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="이번달" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Column="2" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="누적" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+
+                            <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Stroke="Transparent">
+                                <Label x:Name="LbWaterUsageToday" FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="1" Stroke="Transparent">
+                                <Label x:Name="LbWaterUsageMonth" FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="2" Stroke="Transparent">
+                                <Label x:Name="LbWaterUsageAmount" FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+
+                    <Label VerticalTextAlignment="End" Grid.Row="4" Text="전력 사용량(kWh)" FontSize="18" TextColor="{StaticResource LightFont}"/>
+
+                    <Border Grid.Row="5" StrokeThickness="1" Stroke="Transparent">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="4,4,4,4" />
+                        </Border.StrokeShape>
+                        <Grid HeightRequest="60" RowDefinitions="*,*" ColumnDefinitions="*,*,*">
+                            <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="오늘" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Column="1" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="이번달" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Column="2" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="누적" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+
+                            <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Stroke="Transparent">
+                                <Label FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="1" Stroke="Transparent">
+                                <Label FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="2" Stroke="Transparent">
+                                <Label FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <Label VerticalTextAlignment="End" Grid.Row="6" Text="가동 시간(h)" FontSize="18" TextColor="{StaticResource LightFont}"/>
+
+                    <Border Grid.Row="7" StrokeThickness="1" Stroke="Transparent">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="4,4,4,4" />
+                        </Border.StrokeShape>
+                        <Grid HeightRequest="60" RowDefinitions="*,*" ColumnDefinitions="*,*,*">
+                            <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="오늘" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Column="1" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="이번달" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Column="2" Stroke="Transparent">
+                                <Label BackgroundColor="{StaticResource ContentHeader}" TextColor="{StaticResource ContentHeaderText}" FontSize="15" Text="누적" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+
+                            <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Stroke="Transparent">
+                                <Label FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="1" Stroke="Transparent">
+                                <Label FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                            <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="2" Stroke="Transparent">
+                                <Label FontAttributes="Bold" BackgroundColor="{StaticResource ContentBody}" TextColor="{StaticResource TableText}" FontSize="15" Text="0.0" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Border Margin="0,20,0,0" StrokeThickness="0">
+                    <Grid HeightRequest="70" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*">
+                        <Border Margin="-2,-2,-3,-2" StrokeThickness="2" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="세척기 온도" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="2" Grid.Column="1" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="헹굼 온도" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="2" Grid.Column="2" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="식판 건조온도" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-2,-2" StrokeThickness="2" Grid.Column="3" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="그릇 건조온도" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Stroke="{StaticResource TableBorder}">
+                            <Label x:Name="LbTemperatureWasingTank" FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00℃" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="1" Stroke="{StaticResource TableBorder}">
+                            <Label x:Name="LbTemperatureRinseTank" FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00℃" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-2,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="2" Stroke="{StaticResource TableBorder}">
+                            <Label x:Name="LbTemperatureDryTray" FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00℃" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2"
+                                StrokeThickness="1"
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Stroke="{StaticResource TableBorder}">
+                            <Label x:Name="LbTemperatureDryDishes"
+                                   FontAttributes="Bold"
+                                   BackgroundColor="{StaticResource TableBody}"
+                                   TextColor="{StaticResource TableText}"
+                                   FontSize="13"
+                                   Text="00℃"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center" />
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!--<Image Margin="10" HeightRequest="100" Source="testmotor"/>-->
+                <Border Margin="0,20,0,0" StrokeThickness="0">
+                    <Grid HeightRequest="70" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*,*">
+                        <Border Margin="-2,-2,-3,-2" StrokeThickness="2" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="세척 모터" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="2" Grid.Column="1" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="초음파" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="2" Grid.Column="2" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="헹굼모터1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="2" Grid.Column="3" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="헹굼모터2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-2,-2" StrokeThickness="2" Grid.Column="4" Stroke="{StaticResource TableBorder}">
+                            <Label BackgroundColor="{StaticResource TableHeader}" TextColor="{StaticResource TableText}" FontSize="13" Text="레일모터" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-2,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Stroke="{StaticResource TableBorder}">
+                            <Label FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00W" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="1" Stroke="{StaticResource TableBorder}">
+                            <Label FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00W" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="2" Stroke="{StaticResource TableBorder}">
+                            <Label FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00W" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-3,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="3" Stroke="{StaticResource TableBorder}">
+                            <Label FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00W" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                        <Border Margin="-3,-2,-2,-2" StrokeThickness="1" Grid.Row="1" Grid.Column="4" Stroke="{StaticResource TableBorder}">
+                            <Label FontAttributes="Bold" BackgroundColor="{StaticResource TableBody}" TextColor="{StaticResource TableText}" FontSize="13" Text="00W" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!--<Grid Margin="15" ColumnDefinitions="*,*" HeightRequest="100">
+
+                    <Button Margin="10" Text="작업 시작" />
+                    <Button Margin="10" Grid.Column="1" Text="작업 종료"/>
+                </Grid>-->
+            </VerticalStackLayout>
+
+
+            <!--<Border Grid.Row="2" Padding="8" StrokeThickness="0" BackgroundColor="{StaticResource Sections}">
+                <Label Text="Status" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource DarkFont}"/>
+            </Border>-->
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

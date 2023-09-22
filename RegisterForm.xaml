@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CleanDisher.RegisterForm"
+             Title="RegisterForm"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <Style x:Key="EditorBorder" TargetType="{x:Type Border}">
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            <Setter Property="BackgroundColor" Value="LightGray"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="Border.StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="40,40,40,40" />
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style x:Key="Editor" TargetType="{x:Type Entry}">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid
+        Padding="20,50,20,0"
+        HorizontalOptions="FillAndExpand"
+        RowSpacing="20"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            FontAttributes="Bold"
+            FontSize="24"
+            HorizontalOptions="CenterAndExpand"
+            Text="회원가입"
+               TextColor="#23397A" />
+        <Label
+            Grid.Row="1"
+            Margin="0,-15,0,0"
+            HorizontalOptions="CenterAndExpand"
+            Text="가입하실 정보를 입력하세요"
+               TextColor="#23397A" />
+
+        <Grid Grid.Row="2" ColumnDefinitions="*,100">
+            <Border Style="{StaticResource EditorBorder}">
+                <Entry x:Name="InputId" Style="{StaticResource Editor}" Placeholder="아이디"/>
+            </Border>
+            <Button x:Name="BtnIdDuplicateCheck" Clicked="BtnIdDuplicateCheck_Clicked" TextColor="White" Text="중복 확인" Margin="10,0,0,0" Grid.Column="1" BackgroundColor="#3DA0D9"/>
+        </Grid>
+
+        <Border Grid.Row="3" Style="{StaticResource EditorBorder}">
+            <Entry x:Name="InputPassword" Style="{StaticResource Editor}" Placeholder="비밀번호" IsPassword="True"/>
+        </Border>
+
+        <Border Grid.Row="4" Style="{StaticResource EditorBorder}">
+            <Entry x:Name="InputPasswordConfirm" Style="{StaticResource Editor}" Placeholder="비밀번호 확인" IsPassword="True"/>
+        </Border>
+
+        <Border Grid.Row="5" Style="{StaticResource EditorBorder}">
+            <Entry x:Name="InputName" Style="{StaticResource Editor}" Placeholder="이름"/>
+        </Border>
+
+        <Border Grid.Row="6" Style="{StaticResource EditorBorder}">
+            <Entry x:Name="InputBelong" Style="{StaticResource Editor}" Placeholder="소속 명"/>
+        </Border>
+
+        <Button
+            x:Name="BtnRegister"
+            Clicked="BtnRegister_Clicked"
+            Grid.Row="7"
+                BackgroundColor="#23397A"
+            TextColor="White"
+            Command="{Binding RegisterUser}"
+            CornerRadius="20"
+            Text="등록" />
+
+        <Button
+            Grid.Row="8"
+            x:Name="BtnPreviousView"
+            Clicked="BtnPreviousView_Clicked"
+            Text="이전 화면"
+            />
+    </Grid>
+</ContentPage>
